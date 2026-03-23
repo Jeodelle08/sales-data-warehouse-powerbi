@@ -73,205 +73,248 @@ images/
     data_model.png
 ```
 
-Data Pipeline
+---
 
-The project follows a structured BI workflow:
+## Data Modeling
 
-Import raw CSV files into staging tables
-Clean and standardize regional data formats
-Transform raw data into clean fact tables
-Integrate DE and US sales data
-Create dimension tables
-Build a final star schema
-Develop analytical dashboards in Power BI
-SQL Workflow
-1. Staging Layer
+The data warehouse follows a Star Schema design to support analytical reporting and efficient data aggregation.
 
-Raw sales data is loaded into:
+### Fact Table
 
-staging_sales_de
-staging_sales_us
+- fact_sales_star
 
-At this stage, raw values are stored without full normalization.
+This table contains transactional sales data and calculated measures such as profit.
 
-2. Data Transformation
+### Dimension Tables
 
-Regional differences in date and numeric formats are standardized:
+- dim_customer
+- dim_product
+- dim_date
 
-German dates: DD.MM.YYYY
-US dates: YYYY/MM/DD
-German decimal values with comma are converted to SQL numeric format
+These tables provide descriptive attributes used for filtering, grouping, and drill-down analysis.
 
-This step creates:
+The model enables:
 
-fact_sales_de
-fact_sales_us
-fact_sales_global
-3. Dimension Tables
+- efficient aggregation
+- time-based analysis
+- flexible filtering
+- scalable reporting
+- performance optimization
 
-Dimension tables are created using distinct values and surrogate keys:
+---
 
-dim_customer
-dim_product
-dim_date
-4. Star Schema
+## Power BI Dashboard
 
-The final fact table is:
+The Power BI report was developed to support business monitoring and decision-making through interactive visualizations.
 
-fact_sales_star
+The dashboard includes multiple analytical views.
 
-It contains:
+### Overview Page
 
-date_id
-customer_id
-product_id
-revenue
-discount
-costs_usd
-profit
-sales_quantity
-currency
-region
-Data Model
+Key Performance Indicators (KPIs):
 
-The final data warehouse follows a Star Schema.
+- Total Revenue
+- Total Profit
+- Total Quantity
+- Profit Margin %
+- Revenue Growth %
 
-Fact Table
-fact_sales_star
-Dimension Tables
-dim_customer
-dim_product
-dim_date
+Trend Analysis:
 
-This model supports:
+- Revenue development over time
+- Revenue Year-to-Date (YTD)
+- Running revenue
+- Seasonal patterns
 
-efficient filtering
-aggregation
-drill-down analysis
-KPI reporting
-Power BI Dashboard
+Filtering:
 
-The Power BI report includes multiple pages:
+- Region filter (DE / US)
 
-1. Overview
-Total Revenue
-Total Profit
-Profit Margin %
-Revenue Growth %
-Revenue Trend
-Revenue YTD
-Running Revenue
-Region filter
-2. Product and Customer Analysis
-Top Products by Revenue
-Top Customers by Revenue
-Product comparison
-Customer ranking
-3. Regional Comparison
-Revenue by Region
-Profit by Region
-Revenue Distribution by Region
-Quantity by Region
-DAX Measures
+---
 
-The dashboard includes the following key measures:
+### Product and Customer Analysis
 
-Total Revenue
-Total Profit
-Total Quantity
-Profit Margin %
-Revenue Previous Year
-Revenue Growth %
-Revenue YTD
-Running Revenue
+This section focuses on performance evaluation of products and customers.
 
-These measures support performance monitoring, comparison, and time-based analysis.
+Visualizations include:
 
-Currency Consideration
+- Top Products by Revenue
+- Top Customers by Revenue
+- Revenue distribution by product
+- Customer ranking analysis
+
+These visuals help identify:
+
+- high-performing products
+- key revenue-generating customers
+- product demand patterns
+
+---
+
+### Regional Comparison
+
+This section compares performance between Germany and the United States.
+
+Visualizations include:
+
+- Revenue distribution by region
+- Profit comparison by region
+- Quantity comparison by region
+- Percentage contribution by region
+
+This enables:
+
+- regional performance comparison
+- market evaluation
+- business strategy decisions
+
+---
+
+## DAX Measures
+
+The dashboard includes the following calculated measures:
+
+- Total Revenue
+- Total Profit
+- Total Quantity
+- Profit Margin %
+- Revenue Previous Year
+- Revenue Growth %
+- Revenue YTD
+- Running Revenue
+
+These measures support:
+
+- financial performance monitoring
+- growth analysis
+- profitability analysis
+- time-based comparisons
+
+---
+
+## Currency Consideration
 
 The dataset contains transactions in different currencies:
 
-Germany → EUR
-United States → USD
+- Germany uses EUR
+- United States uses USD
 
 In the current version of the project, revenue values are aggregated without currency conversion.
 
 This means:
 
-calculations are technically correct
-but direct financial comparison between regions must be interpreted carefully
+- calculations are technically correct
+- but direct financial comparison between regions should be interpreted carefully
 
-A future improvement would include:
+Future improvement:
 
-exchange rate integration
-conversion into one standard currency
-normalized cross-region financial analysis
-Business Insights
+- integrate exchange rates
+- convert values into one standard currency
+- enable accurate cross-region financial comparison
 
-Based on the analysis, several business insights can be derived:
+---
 
-Regional Performance
+## Business Insights
 
-Revenue contribution between DE and US is relatively balanced, with one region slightly outperforming the other depending on the selected metric.
+Based on the analysis, several important business insights can be observed.
 
-Product Performance
+### Regional Performance
 
-Some products generate significantly higher revenue than others and act as key revenue drivers.
+Revenue distribution between Germany and the United States is relatively balanced, with slight variations depending on the metric analyzed.
 
-Customer Concentration
+### Product Performance
 
-A limited number of customers contribute a large share of overall revenue, indicating revenue concentration among top customers.
+Certain products consistently generate higher revenue and act as primary revenue drivers.
 
-Seasonal Trends
+These products represent critical business assets.
 
-Sales patterns show recurring peaks during specific periods of the year, suggesting seasonality in customer demand.
+### Customer Contribution
 
-Time-Based Growth
+A small group of customers contributes a significant share of total revenue.
 
-Revenue trends indicate recurring fluctuations and can be used to monitor long-term development.
+This indicates customer concentration and highlights key business relationships.
 
-Possible Business Explanations
+### Seasonal Sales Patterns
 
-The observed sales peaks and product performance patterns may be influenced by:
+Sales volumes show recurring peaks during specific months, suggesting seasonal demand behavior.
 
-seasonal demand
-promotional campaigns
-customer buying cycles
-regional purchasing behavior
-product popularity differences
-Future Improvements
+For example:
 
-Possible next steps for this project:
+- increased sales during mid-year periods
+- recurring monthly revenue cycles
 
-currency conversion to one reporting currency
-forecasting and predictive analytics
-automated ETL pipeline
-cloud deployment
-advanced drill-down interactions
-dynamic Top N parameterization
-Screenshots
+### Revenue Growth
 
-Add screenshots of the dashboard and data model in the images/ folder:
+Revenue trends demonstrate periodic growth patterns and fluctuations that can be monitored for long-term planning.
 
-dashboard_overview.png
-product_customer_analysis.png
-regional_comparison.png
-data_model.png
-Skills Demonstrated
+---
 
-This project demonstrates:
+## Possible Business Explanations
 
-SQL querying
-data cleaning
-ETL logic
-data modeling
-star schema design
-Power BI reporting
-DAX measure creation
-business data analysis
-Author
+The observed sales patterns may be influenced by several operational factors:
+
+- seasonal demand changes
+- promotional campaigns
+- product lifecycle timing
+- customer purchasing behavior
+- regional market dynamics
+
+These factors should be considered in strategic planning.
+
+---
+
+## Future Improvements
+
+Possible enhancements for this project include:
+
+- currency conversion implementation
+- predictive sales forecasting
+- automated ETL pipeline development
+- cloud-based deployment
+- advanced drill-down capabilities
+- parameter-driven reporting
+- performance optimization
+
+---
+
+## Screenshots
+
+The repository includes screenshots of the dashboard and data model stored in the images folder.
+
+Examples:
+
+- dashboard_overview.png
+- product_customer_analysis.png
+- regional_comparison.png
+- data_model.png
+
+These visuals demonstrate the final reporting solution.
+
+---
+
+## Skills Demonstrated
+
+This project demonstrates practical experience in:
+
+- SQL querying
+- data transformation
+- ETL process design
+- data warehouse modeling
+- star schema implementation
+- Power BI dashboard development
+- DAX measure creation
+- business data analysis
+- data visualization
+
+---
+
+## Author
 
 Jeodelle Marciale Medjomwo
 
-Business Intelligence / Data Analytics / SAP-oriented profile
+Business Intelligence  
+Data Analytics  
+SAP-oriented profile
+
+
 
