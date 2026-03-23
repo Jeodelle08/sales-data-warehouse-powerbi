@@ -1,4 +1,5 @@
 # Sales Data Warehouse & Power BI Dashboard
+End-to-end Business Intelligence project demonstrating data warehouse design, ETL processing, and interactive dashboard development using SQL and Power BI.
 
 ## Project Overview
 
