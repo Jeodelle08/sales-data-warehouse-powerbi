@@ -70,4 +70,6 @@ powerbi/
 images/
     dashboard_overview.png
     product_customer_analysis.png
-    data_model.png 
+    data_model.png
+
+
